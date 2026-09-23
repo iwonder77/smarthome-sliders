@@ -23,7 +23,13 @@ void loop() {
 
   for (int i = 0; i < config::NUM_REEDS; i++) {
     reeds[i].update(now);
-    if (reeds[i].isTriggered()) {
+    if (reeds[i].justChanged()) {
+      Serial.print("Reed [");
+      Serial.print(i);
+      Serial.print("] on Slider [");
+      Serial.print(i < 3 ? "1" : "2");
+      Serial.print("] ");
+      Serial.println(reeds[i].isActive() ? "triggered" : "released");
     }
   }
 }
