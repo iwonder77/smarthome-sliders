@@ -1,16 +1,16 @@
 #pragma once
 
 /**
- * DebouncedInput.h
+ * ReedSwitch.h
  *
  * initializes GPIO pin to track reed switch state, debounces
  * reed switch, and exposes state of corresponding reed switch
  */
 #include <Arduino.h>
 
-class DebouncedInput {
+class ReedSwitch {
 public:
-  explicit DebouncedInput(uint8_t pin) : input_pin_(pin) {}
+  explicit ReedSwitch(uint8_t pin) : input_pin_(pin) {}
   void init();
   bool readRaw() const;
   void update(uint32_t now);

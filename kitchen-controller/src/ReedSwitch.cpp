@@ -1,7 +1,7 @@
 #include "Config.h"
-#include "DebouncedInput.h"
+#include "ReedSwitch.h"
 
-void DebouncedInput::init() {
+void ReedSwitch::init() {
   pinMode(input_pin_, INPUT);
 
   // seed from the real pin state so boot doesn't look like a transition
@@ -10,9 +10,9 @@ void DebouncedInput::init() {
 }
 
 // states are 1 (ACTIVE) and 0 (INACTIVE)
-bool DebouncedInput::readRaw() const { return digitalRead(input_pin_) == LOW; }
+bool ReedSwitch::readRaw() const { return digitalRead(input_pin_) == LOW; }
 
-void DebouncedInput::update(uint32_t now) {
+void ReedSwitch::update(uint32_t now) {
   bool raw = readRaw();
 
   if (raw != last_raw_) {
@@ -30,6 +30,6 @@ void DebouncedInput::update(uint32_t now) {
   stable_ = last_raw_;
 }
 
-bool DebouncedInput::isActive() const { return stable_; }
+bool ReedSwitch::isActive() const { return stable_; }
 
-bool DebouncedInput::isSettled() const { return stable_ == last_raw_; }
+bool ReedSwitch::isSettled() const { return stable_ == last_raw_; }
