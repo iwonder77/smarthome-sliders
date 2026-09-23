@@ -2,12 +2,12 @@
 #include "src/ReedSwitch.h"
 
 ReedSwitch reeds[config::NUM_REEDS] = {
-  ReedSwitch(config::SLIDER1_REED_INPUT_PINS[0]),
-  ReedSwitch(config::SLIDER1_REED_INPUT_PINS[1]),
-  ReedSwitch(config::SLIDER1_REED_INPUT_PINS[2]),
-  ReedSwitch(config::SLIDER2_REED_INPUT_PINS[0]),
-  ReedSwitch(config::SLIDER2_REED_INPUT_PINS[1]),
-  ReedSwitch(config::SLIDER2_REED_INPUT_PINS[2]),
+  ReedSwitch(config::REED_PINS[0][0]),
+  ReedSwitch(config::REED_PINS[0][1]),
+  ReedSwitch(config::REED_PINS[0][2]),
+  ReedSwitch(config::REED_PINS[1][0]),
+  ReedSwitch(config::REED_PINS[1][1]),
+  ReedSwitch(config::REED_PINS[1][2])
 };
 
 void setup() {
