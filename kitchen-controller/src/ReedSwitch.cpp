@@ -30,4 +30,4 @@ void ReedSwitch::update(uint32_t now) {
   stable_ = last_raw_;
 }
 
-bool ReedSwitch::isTriggered() const { return stable_; }
+bool ReedSwitch::isActive() const { return stable_; }
