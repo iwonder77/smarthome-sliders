@@ -25,9 +25,9 @@ void loop() {
     reeds[i].update(now);
     if (reeds[i].justChanged()) {
       Serial.print("Reed [");
-      Serial.print(i);
+      Serial.print(i % 3 + 1);
       Serial.print("] on Slider [");
-      Serial.print(i < 3 ? "1" : "2");
+      Serial.print(i / 3 + 1);
       Serial.print("] ");
       Serial.println(reeds[i].isActive() ? "triggered" : "released");
     }
