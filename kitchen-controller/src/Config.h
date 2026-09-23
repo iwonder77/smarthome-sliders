@@ -10,6 +10,9 @@
 #include <Arduino.h>
 
 namespace config {
+constexpr uint8_t BUTTON_PIN = 17;
+constexpr uint32_t BUTTON_DEBOUNCE_MS = 20;
+
 constexpr uint8_t NUM_SLIDERS = 2;
 constexpr uint8_t NUM_REEDS_PER_SLIDER = 3;
 constexpr uint8_t NUM_REEDS = NUM_SLIDERS * NUM_REEDS_PER_SLIDER;
