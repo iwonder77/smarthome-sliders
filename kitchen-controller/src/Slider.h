@@ -12,9 +12,12 @@
 #include "ReedSwitch.h"
 
 enum class SliderReading : uint8_t {
-  POSITION1,
-  POSITION2,
-  POSITION3,
+  // valid positions are values in the CMD_TABLE indexes, must stay 0..2 in
+  // physical order
+  POSITION1 = 0,
+  POSITION2 = 1,
+  POSITION3 = 2,
+  // invalid readings: never used as an index in CMD_TABLE
   NONE_ACTIVE,
   MULTIPLE_ACTIVE
 };
