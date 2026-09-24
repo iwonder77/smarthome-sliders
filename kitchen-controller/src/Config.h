@@ -7,6 +7,7 @@
  * - units are encoded in the name (e.g. _MS, _US)
  */
 
+#include "IPAddress.h"
 #include <Arduino.h>
 
 namespace config {
@@ -24,13 +25,17 @@ constexpr uint32_t REED_DEBOUNCE_MS = 40;
 // ===== ETHERNET HARDWARE CONFIG =====
 // ESP32S3-ETH module wiki specifies the following pinout for onboard WZ5500 use
 // wiki link: https://www.waveshare.com/wiki/ESP32-S3-ETH#ETH_DHCP
-constexpr uint8_t W5500_CS = 14;   // Chip Select (CS)
-constexpr uint8_t W5500_RST = 9;   // Reset (RST)
-constexpr uint8_t W5500_INT = 10;  // Interrupt (INT) - optional
-constexpr uint8_t W5500_MISO = 12; // MISO
-constexpr uint8_t W5500_MOSI = 11; // MOSI
-constexpr uint8_t W5500_SCK = 13;  // SPI Clock (SCK)
-constexpr uint16_t UDP_PORT = 5000;
+constexpr uint8_t W5500_CS = 14;    // Chip Select (CS)
+constexpr uint8_t W5500_RST = 9;    // Reset (RST)
+constexpr uint8_t W5500_INT = 10;   // Interrupt (INT) - optional (unused)
+constexpr uint8_t W5500_MISO = 12;  // MISO
+constexpr uint8_t W5500_MOSI = 11;  // MOSI
+constexpr uint8_t W5500_SCK = 13;   // SPI Clock (SCK)
+constexpr uint16_t UDP_PORT = 5000; // Port BrightSign will listen on
+// this station's static IP (unique per station)
+const IPAddress LOCAL_IP(192, 168, 50, 2);
+// BrightSign IP (or Mac running `nc -ul 5000` for testing)
+const IPAddress BRIGHTSIGN_IP(192, 168, 50, 10);
 
 // ===== COMMANDS TO SEND =====
 constexpr const char *CMD_CORRECT = "bread_correct";
@@ -46,5 +51,11 @@ constexpr const char *CMD_TABLE[NUM_REEDS_PER_SLIDER][NUM_REEDS_PER_SLIDER] = {
     {CMD_INCORRECT3, CMD_CORRECT, CMD_INCORRECT2},    //      P2
     {CMD_INCORRECT3, CMD_INCORRECT2, CMD_INCORRECT2}, //      P3
 };
+
+constexpr uint8_t UDP_SEND_REPEATS = 3;    // BrightSign ignores repeats
+constexpr uint32_t UDP_REPEAT_GAP_MS = 15; // spread repeat packets in time
+constexpr uint16_t ETH_RETRANSMIT_TIMEOUT_MS =
+    50; // bounds how long a failed send can block
+constexpr uint8_t ETH_RETRANSMIT_COUNT = 2;
 
 } // namespace config
