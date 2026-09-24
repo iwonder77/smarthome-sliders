@@ -1,4 +1,5 @@
 #include "Slider.h"
+#include "Config.h"
 
 void Slider::init() {
   for (int i = 0; i < config::NUM_REEDS_PER_SLIDER; i++) {
@@ -37,6 +38,19 @@ bool Slider::reedsJustChanged() const {
   return false;
 }
 
+void Slider::logSlider() const {
+  SliderReading current_reading = reading();
+  uint8_t active_mask = activeReedMask();
+  Serial.print("Slider ");
+  Serial.print(id_);
+  Serial.print(" reading: ");
+  for (int i = 0; i < config::NUM_REEDS_PER_SLIDER; i++) {
+    Serial.print((active_mask >> i) & 1);
+  }
+  Serial.print(" --> ");
+  Serial.println(toString(current_reading));
+}
+
 uint8_t Slider::activeReedMask() const {
   uint8_t mask = 0b000;
   for (int i = 0; i < config::NUM_REEDS_PER_SLIDER; i++) {
@@ -46,4 +60,20 @@ uint8_t Slider::activeReedMask() const {
     }
   }
   return mask;
+}
+
+const char *toString(SliderReading reading) {
+  switch (reading) {
+  case SliderReading::NONE_ACTIVE:
+    return "None Active";
+  case SliderReading::POSITION1:
+    return "Position 1";
+  case SliderReading::POSITION2:
+    return "Position 2";
+  case SliderReading::POSITION3:
+    return "Position 3";
+  case SliderReading::MULTIPLE_ACTIVE:
+    return "Multiple Active";
+  }
+  return "UNKNOWN";
 }

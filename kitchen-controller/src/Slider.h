@@ -19,17 +19,24 @@ enum class SliderReading : uint8_t {
   MULTIPLE_ACTIVE
 };
 
+const char *toString(SliderReading reading);
+
 class Slider {
 public:
-  explicit Slider(const uint8_t (&pins)[config::NUM_REEDS_PER_SLIDER])
-      : reeds_{ReedSwitch(pins[0]), ReedSwitch(pins[1]), ReedSwitch(pins[2])} {}
+  explicit Slider(uint8_t id,
+                  const uint8_t (&pins)[config::NUM_REEDS_PER_SLIDER])
+      : id_(id),
+        reeds_{ReedSwitch(pins[0]), ReedSwitch(pins[1]), ReedSwitch(pins[2])} {}
 
   void init();
   void update(uint32_t now);
   SliderReading reading() const;
   bool reedsJustChanged() const;
-  uint8_t activeReedMask() const;
+  void logSlider() const;
 
 private:
+  uint8_t activeReedMask() const;
+
+  const uint8_t id_;
   ReedSwitch reeds_[config::NUM_REEDS_PER_SLIDER];
 };
