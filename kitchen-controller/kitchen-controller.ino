@@ -1,35 +1,19 @@
 #include "src/Config.h"
-#include "src/ReedSwitch.h"
+#include "src/Slider.h"
 
-ReedSwitch reeds[config::NUM_REEDS] = {
-  ReedSwitch(config::REED_PINS[0][0]),
-  ReedSwitch(config::REED_PINS[0][1]),
-  ReedSwitch(config::REED_PINS[0][2]),
-  ReedSwitch(config::REED_PINS[1][0]),
-  ReedSwitch(config::REED_PINS[1][1]),
-  ReedSwitch(config::REED_PINS[1][2])
-};
+Slider slider1(config::SLIDER1_PINS);
+Slider slider2(config::SLIDER2_PINS);
 
 void setup() {
   Serial.begin(115200);
   while (!Serial && millis() < 3000) {}  // USB CDC needs time to enumerate
 
-  for (int i = 0; i < config::NUM_REEDS; i++) reeds[i].init();
-  Serial.println("READING REED SWITCHES");
+  slider1.init();
+  slider2.init();
 }
 
 void loop() {
   uint32_t now = millis();
-
-  for (int i = 0; i < config::NUM_REEDS; i++) {
-    reeds[i].update(now);
-    if (reeds[i].justChanged()) {
-      Serial.print("Reed [");
-      Serial.print(i % 3 + 1);
-      Serial.print("] on Slider [");
-      Serial.print(i / 3 + 1);
-      Serial.print("] ");
-      Serial.println(reeds[i].isActive() ? "triggered" : "released");
-    }
-  }
+  slider1.update(now);
+  slider2.update(now);
 }
