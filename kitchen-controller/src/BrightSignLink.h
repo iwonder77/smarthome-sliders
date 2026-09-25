@@ -13,9 +13,9 @@
  */
 
 #include <Arduino.h>
-#include <SPI.h>
 #include <Ethernet.h>
 #include <EthernetUdp.h>
+#include <SPI.h>
 
 #include "Config.h"
 
@@ -59,11 +59,12 @@ public:
   uint32_t sendFailures() const;
 
 private:
-  void resetW5500();                 // pulse the RST pin
-  void readEthernetMac(uint8_t *mac); // factory MAC reserved for Ethernet
+  void resetW5500();                       // pulse the RST pin
+  bool readEthernetMac(uint8_t (&mac)[6]); // factory MAC reserved for Ethernet
 
   EthernetUDP udp_;
-  bool hardware_found_ = false; // result of the hardwareStatus() check in init()
+  bool hardware_found_ =
+      false; // result of the hardwareStatus() check in init()
   EthernetLinkStatus last_link_status_ = Unknown; // to detect link transitions
   uint32_t last_link_poll_ms_ = 0; // rate-limits SPI link polling
   uint32_t packets_sent_ = 0;      // diagnostics
