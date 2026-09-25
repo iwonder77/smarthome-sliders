@@ -36,6 +36,7 @@ constexpr uint16_t UDP_PORT = 5000; // Port BrightSign will listen on
 const IPAddress LOCAL_IP(192, 168, 50, 2);
 // BrightSign IP (or Mac running `nc -ul 5000` for testing)
 const IPAddress BRIGHTSIGN_IP(192, 168, 50, 10);
+constexpr uint32_t LINK_POLL_INTERVAL_MS = 500;
 
 // ===== COMMANDS TO SEND =====
 constexpr const char *CMD_CORRECT = "bread_correct";
