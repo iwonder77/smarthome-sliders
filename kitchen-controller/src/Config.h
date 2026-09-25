@@ -45,6 +45,7 @@ constexpr const char *CMD_INCORRECT2 = "bread_incorrect2";
 constexpr const char *CMD_INCORRECT3 = "bread_incorrect3";
 constexpr const char *CMD_INVALID_FEEDBACK = nullptr;
 
+// dimenstions of this table are positions/reeds per slider
 constexpr const char *CMD_TABLE[NUM_REEDS_PER_SLIDER][NUM_REEDS_PER_SLIDER] = {
     // rows: slider 1 position, columns: slider 2 position
     // S2: P1               P2              P3
