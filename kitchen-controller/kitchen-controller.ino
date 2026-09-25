@@ -11,7 +11,7 @@ uint32_t last_button_press_timestamp = 0;
 bool buttonPressed(uint32_t now) {
   bool raw = digitalRead(config::BUTTON_PIN) == LOW;
 
-  if (raw != last_raw){
+  if (raw != last_raw) {
     last_raw = raw;
     last_button_press_timestamp = now;
     return false;
