@@ -53,10 +53,10 @@ public:
   bool isReady() const;
 
   /** @return packets successfully handed off by the W5500 since boot */
-  uint32_t packetsSent() const;
+  uint32_t packetsSent() const { return packets_sent_; };
 
   /** @return packets that failed to send since boot */
-  uint32_t sendFailures() const;
+  uint32_t sendFailures() const { return send_failures_; };
 
 private:
   void resetW5500();                       // pulse the RST pin
