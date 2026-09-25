@@ -13,6 +13,7 @@ CompileFlags:
   Add: 
     - "-I./src"
     - "-I/Users/isaisanchez/Documents/Arduino/libraries/Ethernet/src"
+    - "-I/Users/isaisanchez/Library/Arduino15/packages/esp32/hardware/esp32/3.3.11/libraries/SPI/src""
     - "-I."
     - "-std=c++20"
     - "-DESP32"
